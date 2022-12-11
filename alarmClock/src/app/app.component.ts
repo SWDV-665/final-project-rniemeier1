@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
+    { title: 'Alarms', url: '/Alarms', icon: 'alarm-sharp' },
     { title: 'Alarm Sound', url: '/settings/Sound', icon: 'musical-notes-outline' },
     { title: 'Alarm Vibration', url: '/settings/Vibration', icon: 'radio-sharp' },
     { title: 'Dismissal Method', url: '/settings/Dismiss', icon: 'notifications-off-sharp' },
