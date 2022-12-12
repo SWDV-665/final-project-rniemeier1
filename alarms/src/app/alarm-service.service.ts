@@ -18,6 +18,7 @@ export class AlarmServiceService {
   //vibration on?
   vibrateEnabled:boolean = true;
 
+  snoozeMins = 5;
   seconds = 60; //set the number of seconds between checking to see if alarm should be going off
   
   timer = setInterval(() => { //check to see if we should set off an alarm
@@ -106,10 +107,8 @@ export class AlarmServiceService {
   snoozeAlarm(alarmName: string){
     this.localNotifications.schedule({
       text: "Snoozed Alarm going off: " + alarmName,
-      trigger: {at: new Date(new Date().getTime() + 3600)}
+      trigger: {at: new Date(new Date().getTime() + (1000 * this.snoozeMins))}
    });
-
-
   }
 
 }
