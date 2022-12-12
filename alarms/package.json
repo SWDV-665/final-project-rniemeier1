@@ -45,11 +45,13 @@
     "@angular/language-service": "^15.0.0",
     "@capacitor/cli": "4.6.1",
     "@ionic/angular-toolkit": "^6.0.0",
+    "@ionic/lab": "3.2.15",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "cordova-android": "^10.1.2",
+    "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-device": "2.0.2",
@@ -89,7 +91,8 @@
     },
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   }
 }

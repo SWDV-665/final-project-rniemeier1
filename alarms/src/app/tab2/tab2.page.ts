@@ -10,6 +10,7 @@ import { InputDialogServiceService } from '../input-dialog-service.service';
 })
 export class Tab2Page {
   title = "Settings";
+  vibes = this.DataService.vibrateEnabled
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public DataService: AlarmServiceService, public InputService: InputDialogServiceService) {}
   
   loadAlarms(){
@@ -22,6 +23,10 @@ export class Tab2Page {
 
   toggleVibaration(){
     this.DataService.toggleVibes();
+  }
+
+  loadVibes(){
+    return this.DataService.vibrateEnabled;
   }
 
 }

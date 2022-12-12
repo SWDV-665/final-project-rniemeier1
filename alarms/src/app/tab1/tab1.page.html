@@ -18,6 +18,12 @@
         <h3>{{alarm.name}} </h3>
         <ion-toggle slot="end" [checked]="alarm.enabled" (click)="toggleAlarm(i)"></ion-toggle>
       </ion-item>
+      <ion-item-options side="start">
+        <button (click)="editAlarm(alarm,i)" ion-button color="primary">
+          <ion-icon name="create"></ion-icon>
+          Edit Alarm
+        </button>
+      </ion-item-options>
       <ion-item-options side="end">
         <button (click)="deleteAlarm(alarm, i)" ion-button color="danger"> 
           <ion-icon name="trash-outline"></ion-icon>
