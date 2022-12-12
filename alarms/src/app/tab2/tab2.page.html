@@ -14,9 +14,12 @@
   </ion-header>
 
   <ion-list>
-    <ion-item>
+    <ion-item (click)="disableAllAlarms()">
       <ion-label>Turn Off All Alarms</ion-label>
-      <ion-toggle slot="end" [checked]="true"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Alarm Vibration</ion-label>
+      <ion-toggle slot="end" [checked]="{{this.DataService.vibrateEnabled}}"></ion-toggle>
     </ion-item>
   </ion-list>
 </ion-content>

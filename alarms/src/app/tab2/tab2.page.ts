@@ -20,4 +20,8 @@ export class Tab2Page {
     this.DataService.toggleAllAlarmsOff();
   }
 
+  toggleVibaration(){
+    this.DataService.toggleVibes();
+  }
+
 }

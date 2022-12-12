@@ -8,12 +8,15 @@ import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications
 })
 export class AlarmServiceService {
 
-  constructor(public frngdSvc: ForegroundService, public notification: LocalNotifications) { }
+  constructor(public frngdSvc: ForegroundService, public localNotifications: LocalNotifications) { }
 
   //List of Alarms
   alarms: any = [];
   currentTime = new Date();
   notAllOff:boolean = true;
+
+  //vibration on?
+  vibrateEnabled:boolean = true;
 
   seconds = 60; //set the number of seconds between checking to see if alarm should be going off
   
@@ -22,8 +25,8 @@ export class AlarmServiceService {
       this.currentTime = new Date(); //update the currentTime
 
       this.alarms.forEach((alarm: { name: string; hour: number, minute: number, enabled: boolean }) => { //see if its time for any alarm to go off
-        if(alarm.hour == this.currentTime.getHours() && alarm.minute == this.currentTime.getMinutes()){ //set off alarm
-          this.triggerAlarm();
+        if(alarm.hour == this.currentTime.getHours() && alarm.minute == this.currentTime.getMinutes() && alarm.enabled){ //set off alarm
+          this.triggerAlarm(alarm.name);
         }
       });
     }
@@ -72,6 +75,10 @@ export class AlarmServiceService {
     
   }
 
+  toggleVibes(){
+    this.vibrateEnabled  = !this.vibrateEnabled;
+  }
+
   toggleAllAlarmsOff(){ //disable all alarms
     this.alarms.forEach((alarm: { name: string; hour: number, minute: number, enabled: boolean }) => { //see if its time for any alarm to go off
       alarm.enabled = false;
@@ -79,12 +86,30 @@ export class AlarmServiceService {
     this.checkAllAlarms();
   }
 
-  triggerAlarm(){
-    this.notification.local.schedule({
-      title: 'My first notification',
-      text: 'Thats pretty easy...',
-      foreground: true
-  });
+  triggerAlarm(alarmName: string){
+    this.localNotifications.setDefaults({
+      id: 1,
+      title: 'Alarm!',
+      text: alarmName,
+      foreground: true,
+      vibrate: this.vibrateEnabled,
+      actions:[
+        {id:'Dismiss', title:'Dissmiss'},
+        {id:'Snooze', title:'Snooze'}
+      ]
+
+    });
+
+
+  }
+
+  snoozeAlarm(alarmName: string){
+    this.localNotifications.schedule({
+      text: "Snoozed Alarm going off: " + alarmName,
+      trigger: {at: new Date(new Date().getTime() + 3600)}
+   });
+
+
   }
 
 }
