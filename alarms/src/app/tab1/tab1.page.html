@@ -10,27 +10,26 @@
   <ion-list>
     <ion-item-sliding *ngFor="let alarm of alarms">
       <ion-item>
-        <ion-avatar item-start>
-          <ion-icon name="alarm-sharp"></ion-icon>
-        </ion-avatar>
-        
-        <ion-datetime presentation="time" displayFormat="hh-mm-A"></ion-datetime>
-        <ion-label>{{alarm.name}} {{ alarm.time.getHours() + ":" + (alarm.time.getMinutes() < 10 ? "0" + alarm.time.getMinutes() : alarm.time.getMinutes())}}</ion-label>
+        <ion-icon style="padding-right: 20px;" name="alarm-sharp"></ion-icon>
+        <h2 style="padding-right: 20px;">{{ alarm.time.getHours() + ":" + (alarm.time.getMinutes() < 10 ? "0" + alarm.time.getMinutes() : alarm.time.getMinutes())}}</h2>
+        <h3>{{alarm.name}} </h3>
         <ion-toggle slot="end" [checked]="alarm.enabled"></ion-toggle>
       </ion-item>
       <ion-item-options side="end">
-        <button  ion-button color="danger"> <!--(click)="deleteAlarm(alarm, i)"-->
+        <button  ion-button color="danger"> <!--(click)="deleteAlarm(alarm, index)"-->
           <ion-icon name="trash-outline"></ion-icon>
           Delete Alarm
         </button>
       </ion-item-options>
     </ion-item-sliding>
 
+    <!--<ion-datetime presentation="time" displayFormat="hh-mm-A"></ion-datetime>-->
+
   </ion-list>
 
-  <ion-fab bottom right>
-    <ion-fab-button click="addAlarm()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab bottom style="display: flex; width: 100%; padding-top: 20px; flex-direction: row; justify-content: center;">
+      <ion-fab-button click="addAlarm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
