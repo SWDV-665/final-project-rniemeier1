@@ -1,7 +1,0 @@
-{
-  "name": "alarmClock",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

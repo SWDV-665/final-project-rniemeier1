@@ -1,17 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let alarm of alarms">
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="alarm-sharp"></ion-icon>
+        </ion-avatar>
+        
+        <ion-datetime presentation="time" displayFormat="hh-mm-A"></ion-datetime>
+        <ion-label>{{alarm.name}} {{ alarm.time.getHours() + ":" + (alarm.time.getMinutes() < 10 ? "0" + alarm.time.getMinutes() : alarm.time.getMinutes())}}</ion-label>
+        <ion-toggle slot="end" [checked]="alarm.enabled"></ion-toggle>
+      </ion-item>
+      <ion-item-options side="end">
+        <button  ion-button color="danger"> <!--(click)="deleteAlarm(alarm, i)"-->
+          <ion-icon name="trash-outline"></ion-icon>
+          Delete Alarm
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  </ion-list>
+
+  <ion-fab bottom right>
+    <ion-fab-button click="addAlarm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
