@@ -7,16 +7,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" padding>
+  <h3 text-center *ngIf="loadAlarms().length === 0">
+    Touch the + button to add an alarm!
+  </h3>
   <ion-list>
-    <ion-item-sliding *ngFor="let alarm of alarms">
+    <ion-item-sliding *ngFor="let alarm of loadAlarms(); let i = index">
       <ion-item>
         <ion-icon style="padding-right: 20px;" name="alarm-sharp"></ion-icon>
-        <h2 style="padding-right: 20px;">{{ alarm.time.getHours() + ":" + (alarm.time.getMinutes() < 10 ? "0" + alarm.time.getMinutes() : alarm.time.getMinutes())}}</h2>
+        <h2 style="padding-right: 20px;">{{ alarm.hour + ":" + (alarm.minute < 10 ? "0" + alarm.minute : alarm.minute)}}</h2>
         <h3>{{alarm.name}} </h3>
-        <ion-toggle slot="end" [checked]="alarm.enabled"></ion-toggle>
+        <ion-toggle slot="end" [checked]="alarm.enabled" (click)="toggleAlarm(i)"></ion-toggle>
       </ion-item>
       <ion-item-options side="end">
-        <button  ion-button color="danger"> <!--(click)="deleteAlarm(alarm, index)"-->
+        <button (click)="deleteAlarm(alarm, i)" ion-button color="danger"> 
           <ion-icon name="trash-outline"></ion-icon>
           Delete Alarm
         </button>
@@ -28,7 +31,7 @@
   </ion-list>
 
     <ion-fab bottom style="display: flex; width: 100%; padding-top: 20px; flex-direction: row; justify-content: center;">
-      <ion-fab-button click="addAlarm()">
+      <ion-fab-button (click)="addAlarm()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
